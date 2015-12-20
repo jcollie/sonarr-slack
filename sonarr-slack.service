@@ -1,0 +1,12 @@
+[Unit]
+Description=Forward Sonarr Notifications to Slack
+After=network-online.target
+Requires=network-online.target
+
+[Service]
+WorkingDirectory=/opt/sonarr-slack
+ExecStart=/opt/sonarr-slack/bin/python /opt/sonarr-slack/bin/sonarr-slack.py --webhook={{ pillar['sonarr-slack-webhook'] }}
+SyslogIdentifier=sonarr-slack
+
+[Install]
+WantedBy=multi-user.target
